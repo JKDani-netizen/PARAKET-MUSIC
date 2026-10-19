@@ -1,0 +1,26 @@
+
+name: Build BLUE MUSIC 3DS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkitarm
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Compilar aplicacion
+        run: make
+
+      - name: Guardar archivo 3DSX
+        uses: actions/upload-artifact@v4
+        with:
+          name: BLUE-MUSIC-3DS
+          path: BLUE_MUSIC_3DS.3dsx
+          
